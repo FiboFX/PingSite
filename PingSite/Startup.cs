@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PingSite.Core.EF;
+using PingSite.Core.Repositories;
 
 namespace PingSite
 {
@@ -27,6 +28,8 @@ namespace PingSite
 
             services.AddDbContext<PingSiteContext>(
                 options => options.UseSqlServer(Configuration["Sql:ConnectionString"]));
+
+            services.AddTransient<IBuildingRepository, BuildingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

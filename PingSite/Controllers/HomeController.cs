@@ -5,13 +5,21 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PingSite.Core.Repositories;
 using PingSite.Models;
 
 namespace PingSite.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IBuildingRepository _buildingRepository;
+
+        public HomeController(IBuildingRepository buildingRepository)
+        {
+            _buildingRepository = buildingRepository;
+        }
+
+        public async Task<IActionResult> Index()
         {
             bool isOnline = false;
             Ping ping = new Ping();
@@ -26,6 +34,7 @@ namespace PingSite.Controllers
             }
 
             ViewBag.IsOnline = isOnline;
+            var buildList = await _buildingRepository.GetAllAsync();
 
             return View();
         }
