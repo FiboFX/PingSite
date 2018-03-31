@@ -11,5 +11,6 @@ namespace PingSite.Core.Models
         public bool LastStatus { get; set; }
         
         public Category Category { get; set; }
+        public Room Room { get; set; }
     }
 }
