@@ -1,0 +1,13 @@
+*.cache
+
+.vs
+
+PingSite/obj/
+
+PingSite/bin/
+
+PingSite\.Core/obj/
+
+PingSite\.Core/bin/
+
+.vscode
