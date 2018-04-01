@@ -6,8 +6,8 @@ namespace PingSite.Core.Models
 {
     public class Category
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string ImgUrl { get; set; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string ImgUrl { get; private set; }
     }
 }

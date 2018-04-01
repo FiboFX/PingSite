@@ -6,11 +6,11 @@ namespace PingSite.Core.Models
 {
     public class Host
     {
-        public int Id { get; set; }
-        public string Address { get; set; }
-        public bool LastStatus { get; set; }
+        public int Id { get; private set; }
+        public string Address { get; private set; }
+        public bool LastStatus { get; private set; }
         
-        public Category Category { get; set; }
-        public Room Room { get; set; }
+        public Category Category { get; private set; }
+        public Room Room { get; private set; }
     }
 }
