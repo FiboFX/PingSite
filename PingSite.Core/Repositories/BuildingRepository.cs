@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PingSite.Core.EF;
 using PingSite.Core.Models;
 
@@ -17,7 +18,7 @@ namespace PingSite.Core.Repositories
         }
 
         public async Task<IEnumerable<Building>> GetAllAsync()
-            => await Task.FromResult(_context.Buildings);
+            => await _context.Buildings.ToListAsync();
 
         public async Task AddAsync(Building building)
         {
