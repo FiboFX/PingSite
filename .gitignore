@@ -2,14 +2,13 @@
 
 .vs
 
-PingSite/obj/
+PingSite/obj/ 
+ 
+PingSite/bin/ 
+ 
+PingSite\.Core/obj/ 
+ 
+PingSite\.Core/bin/ 
+*.targets
 
-PingSite/bin/
-
-PingSite\.Core/obj/
-
-PingSite\.Core/bin/
-
-.vscode
-*.cache
-PingSite/obj/Debug/netcoreapp2.0/PingSite.csprojResolveAssemblyReference.cache
+*.props
