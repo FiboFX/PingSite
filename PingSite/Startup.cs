@@ -29,7 +29,10 @@ namespace PingSite
             services.AddDbContext<PingSiteContext>(
                 options => options.UseSqlServer(Configuration["Sql:ConnectionString"]));
 
-            services.AddTransient<IBuildingRepository, BuildingRepository>();
+            services.AddScoped<IBuildingRepository, BuildingRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IHostRepository, HostRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
