@@ -17,9 +17,6 @@ namespace PingSite.Core.Repositories
             _context = context;
         }
 
-        public async Task<Building> GetAsync(int id)
-            => await _context.Buildings.SingleOrDefaultAsync(x => x.Id == id);
-
         public async Task<IEnumerable<Building>> GetAllAsync()
             => await _context.Buildings.ToListAsync();
 
