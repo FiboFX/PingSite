@@ -8,6 +8,7 @@ namespace PingSite.Core.Repositories
 {
     public interface IBuildingRepository
     {
+        Task<Building> GetAsync(int id);
         Task<IEnumerable<Building>> GetAllAsync();
         Task AddAsync(Building building);
         Task UpdateAsync(Building building);
