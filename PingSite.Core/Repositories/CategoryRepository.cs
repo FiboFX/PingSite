@@ -18,7 +18,7 @@ namespace PingSite.Core.Repositories
         }
 
         public async Task<Category> GetAsync(int id)
-            => await _context.Categories.SingleOrDefaultAsync(x => x.Id == id)'
+            => await _context.Categories.SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task<IEnumerable<Category>> GetAllAsync()
             => await _context.Categories.ToListAsync();
