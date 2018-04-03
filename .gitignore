@@ -11,3 +11,5 @@ PingSite\.Core/obj/
 PingSite\.Core/bin/
 
 .vscode
+*.cache
+PingSite/obj/Debug/netcoreapp2.0/PingSite.csprojResolveAssemblyReference.cache
