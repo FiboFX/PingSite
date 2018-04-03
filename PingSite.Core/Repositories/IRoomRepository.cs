@@ -8,6 +8,7 @@ namespace PingSite.Core.Repositories
 {
     public interface IRoomRepository
     {
+        Task<Room> GetAsync(int id);
         Task<IEnumerable<Room>> GetAllAsync();
         Task AddAsync(Room room);
         Task UpdateAsync(Room room);
