@@ -4,11 +4,11 @@
 
 PingSite/obj/
  
-PingSite/bin/ 
+PingSite/bin/
  
-PingSite\.Core/obj/ 
+PingSite\.Core/obj/
  
-PingSite\.Core/bin/ 
+PingSite\.Core/bin/
 *.targets
 
 *.props
