@@ -37,7 +37,7 @@ namespace PingSite.Core.Repositories
 
         public async Task RemoveAsync(Room room)
         {
-            _context.Remove(room);
+            _context.Rooms.Remove(room);
             await _context.SaveChangesAsync();
         }
     }
