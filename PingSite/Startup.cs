@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PingSite.Core.EF;
 using PingSite.Core.Repositories;
+using PingSite.Core.Services;
 
 namespace PingSite
 {
@@ -33,6 +34,8 @@ namespace PingSite
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IHostRepository, HostRepository>();
+
+            services.AddScoped<IBuildingService, BuildingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
