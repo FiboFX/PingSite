@@ -1,12 +1,6 @@
-﻿@model PingSite.Core.DTO.HostDto
+﻿@model IEnumerable<PingSite.Core.DTO.BuildingDto>
 
-<h1>@Model.Address</h1>
-
-@if (Model.LastStatus)
+@foreach(var b in Model)
 {
-    <div class="alert alert-success">Online</div>
-}
-else
-{
-    <div class="alert alert-danger">Offline</div>
+    <h1>@b.Name</h1>
 }

@@ -7,37 +7,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PingSite.Core.DTO;
 using PingSite.Core.Repositories;
+using PingSite.Core.Services;
 using PingSite.Models;
 
 namespace PingSite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBuildingRepository _buildingRepository;
+        private readonly IBuildingService _buildingService;
 
-        public HomeController(IBuildingRepository buildingRepository)
+        public HomeController(IBuildingService buildingService)
         {
-            _buildingRepository = buildingRepository;
+            _buildingService = buildingService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var host = new HostDto();
-            host.Id = 1;
-            host.Address = "192.168.2.8";
-            
-            Ping ping = new Ping();
-            try
-            {
-                PingReply reply = ping.Send(host.Address);
-                host.LastStatus = reply.Status == IPStatus.Success;
-            }
-            catch (PingException)
-            {
+            //var host = new HostDto();
+            //host.Id = 1;
+            //host.Address = "192.168.2.8";
 
-            }
+            //Ping ping = new Ping();
+            //try
+            //{
+            //    PingReply reply = ping.Send(host.Address);
+            //    host.LastStatus = reply.Status == IPStatus.Success;
+            //}
+            //catch (PingException)
+            //{
 
-            return View(host);
+            //}
+
+            var buildings = await _buildingService.GetAllAsync();
+
+            return View(buildings);
         }
     }
 }
