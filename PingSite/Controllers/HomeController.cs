@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PingSite.Core.DTO;
 using PingSite.Core.Repositories;
 using PingSite.Models;
 
@@ -21,22 +22,22 @@ namespace PingSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            bool isOnline = false;
+            var host = new HostDto();
+            host.Id = 1;
+            host.Address = "192.168.2.8";
+            
             Ping ping = new Ping();
             try
             {
-                PingReply reply = ping.Send("192.168.2.8");
-                isOnline = reply.Status == IPStatus.Success;
+                PingReply reply = ping.Send(host.Address);
+                host.LastStatus = reply.Status == IPStatus.Success;
             }
             catch (PingException)
             {
 
             }
 
-            ViewBag.IsOnline = isOnline;
-            var buildList = await _buildingRepository.GetAllAsync();
-
-            return View();
+            return View(host);
         }
     }
 }

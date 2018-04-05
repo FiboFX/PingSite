@@ -1,6 +1,8 @@
-﻿<h1>Index site</h1>
+﻿@model PingSite.Core.DTO.HostDto
 
-@if (ViewBag.IsOnline)
+<h1>@Model.Address</h1>
+
+@if (Model.LastStatus)
 {
     <div class="alert alert-success">Online</div>
 }
