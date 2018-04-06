@@ -10,5 +10,6 @@ namespace PingSite.Core.Services
     {
         Task<IEnumerable<BuildingDto>> GetAllAsync();
         Task<bool> AddAsync(string name);
+        Task<bool> RemoveAsync(int id);
     }
 }

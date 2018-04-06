@@ -30,5 +30,19 @@ namespace PingSite.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var status = await _buildingService.RemoveAsync(id);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
