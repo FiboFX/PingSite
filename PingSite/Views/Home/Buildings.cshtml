@@ -15,7 +15,7 @@
             <div class="building">
                 <img src="~/images/building.svg" width="30" height="37"> <a href="#">@b.Name</a>
                 <div class="options">
-                    <a asp-controller="Building" asp-action="Edit"  class="btn btn-outline-primary">Edit</a>
+                    <a asp-controller="Building" asp-action="Edit" asp-route-id="@b.Id" class="btn btn-outline-primary">Edit</a>
                     <a asp-controller="Building" asp-action="Delete" asp-route-id="@b.Id" class="btn btn-outline-primary">Delete</a>
                 </div>
             </div>

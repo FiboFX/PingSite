@@ -38,6 +38,19 @@ namespace PingSite.Core.Services
             return true;
         }
 
+        public async Task<bool> UpdateAsync(int id, string name)
+        {
+            var building = await _buildingRepository.GetAsync(id);
+            if(building == null)
+            {
+                return false;
+            }
+            building.SetName(name);
+            await _buildingRepository.UpdateAsync(building);
+
+            return true;
+        }
+
         public async Task<bool> RemoveAsync(int id)
         {
             var building = await _buildingRepository.GetAsync(id);

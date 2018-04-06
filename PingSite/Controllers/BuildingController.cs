@@ -31,13 +31,21 @@ namespace PingSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Edit(int id)
+        [HttpGet()]
+        public IActionResult Edit()
         {
             return View();
         }
 
-        [HttpGet("id")]
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBuilding editBuilding)
+        {
+            var status = await _buildingService.UpdateAsync(editBuilding.Id, editBuilding.Name);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var status = await _buildingService.RemoveAsync(id);
