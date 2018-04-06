@@ -6,7 +6,7 @@ namespace PingSite.Core.DTO
 {
     public class HostDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Address { get; set; }
         public bool LastStatus { get; set; }
     }

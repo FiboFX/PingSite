@@ -6,13 +6,13 @@ namespace PingSite.Core.Models
 {
     public class Category
     {
-        public int Id { get; private set; }
+        public int? Id { get; private set; }
         public string Name { get; private set; }
         public string ImgUrl { get; private set; }
 
         protected Category() { }
 
-        protected Category(int id, string name, string imgUrl)
+        protected Category(int? id, string name, string imgUrl)
         {
             Id = id;
             SetName(name);
@@ -37,7 +37,7 @@ namespace PingSite.Core.Models
             ImgUrl = imgUrl;
         }
 
-        public static Category Create(int id, string name, string imgUrl)
+        public static Category Create(int? id, string name, string imgUrl)
             => new Category(id, name, imgUrl);
     }
 }

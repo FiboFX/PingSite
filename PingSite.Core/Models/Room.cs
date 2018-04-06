@@ -6,14 +6,14 @@ namespace PingSite.Core.Models
 {
     public class Room
     {
-        public int Id { get; private set; }
+        public int? Id { get; private set; }
         public string Name { get; private set; }
 
         public Building Building { get; private set; }
 
         protected Room() { }
 
-        protected Room(int id, string name, Building building)
+        protected Room(int? id, string name, Building building)
         {
             Id = id;
             SetName(name);
@@ -29,7 +29,7 @@ namespace PingSite.Core.Models
             Name = name;
         }
 
-        public static Room Create(int id, string name, Building building)
+        public static Room Create(int? id, string name, Building building)
             => new Room(id, name, building);
     }
 }
