@@ -12,8 +12,8 @@
 {
     <div class="row">
         <div class="col-lg">
-            <div class="building">
-                <img src="~/images/building.svg" width="30" height="37"> <a href="#">@b.Name</a>
+            <div class="list">
+                <img src="~/images/building.svg" width="30" height="37"> <a asp-controller="Home" asp-action="Rooms" asp-route-id="@b.Id">@b.Name</a>
                 <div class="options">
                     <a asp-controller="Building" asp-action="Edit" asp-route-id="@b.Id" class="btn btn-outline-primary">Edit</a>
                     <a asp-controller="Building" asp-action="Delete" asp-route-id="@b.Id" class="btn btn-outline-primary">Delete</a>

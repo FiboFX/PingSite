@@ -15,10 +15,12 @@ namespace PingSite.Controllers
     public class HomeController : Controller
     {
         private readonly IBuildingService _buildingService;
+        private readonly IRoomService _roomService;
 
-        public HomeController(IBuildingService buildingService)
+        public HomeController(IBuildingService buildingService, IRoomService roomService)
         {
             _buildingService = buildingService;
+            _roomService = roomService;
         }
 
         [HttpGet]
@@ -48,6 +50,14 @@ namespace PingSite.Controllers
             var buildings = await _buildingService.GetAllAsync();
 
             return View(buildings);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Rooms(int id)
+        {
+            var rooms = await _roomService.GetAllAsync(id);
+
+            return View(rooms);
         }
     }
 }
