@@ -7,6 +7,7 @@ namespace PingSite.Core.Models
     public class Host
     {
         public int? Id { get; private set; }
+        public string Name { get; private set; }
         public string Address { get; private set; }
         public bool LastStatus { get; private set; }
         
@@ -15,13 +16,23 @@ namespace PingSite.Core.Models
 
         protected Host() { }
 
-        protected Host(int? id, string address, bool lastStatus, Category category, Room room)
+        protected Host(int? id, string name, string address, bool lastStatus, Category category, Room room)
         {
             Id = id;
+            SetName(name);
             SetAddress(address);
             LastStatus = lastStatus;
             Category = category;
             Room = room;
+        }
+
+        public void SetName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new Exception("Category name can't be empty");
+            }
+            Name = name;
         }
 
         public void SetAddress(string address)
@@ -33,7 +44,7 @@ namespace PingSite.Core.Models
             Address = address;
         }
 
-        public static Host Create(int? id, string address, bool lastStatus, Category category, Room room)
-            => new Host(id, address, lastStatus, category, room);
+        public static Host Create(int? id, string name, string address, bool lastStatus, Category category, Room room)
+            => new Host(id, name, address, lastStatus, category, room);
     }
 }
