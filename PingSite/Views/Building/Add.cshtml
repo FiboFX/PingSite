@@ -1,0 +1,16 @@
+﻿@model PingSite.Models.Building.AddBuilding
+
+<div class="row">
+    <div class="col-lg">
+        @using(Html.BeginForm())
+        {
+            <form>
+                <div class="form-group">
+                    <label>Name</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control"})
+                </div>
+                <button type="submit" class="btn btn-success">Add</button>
+            </form>
+        }
+    </div>
+</div>

@@ -6,12 +6,12 @@ namespace PingSite.Core.Models
 {
     public class Building
     {
-        public int Id { get; private set; }
+        public int? Id { get; private set; }
         public string Name { get; private set; }
 
         protected Building() { }
 
-        protected Building(int id, string name)
+        protected Building(int? id, string name)
         {
             Id = id;
             SetName(name);
@@ -26,7 +26,7 @@ namespace PingSite.Core.Models
             Name = name;
         }
 
-        public static Building Create(int id, string name)
+        public static Building Create(int? id, string name)
             => new Building(id, name);
     }
 }

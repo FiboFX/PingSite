@@ -21,7 +21,8 @@ namespace PingSite.Controllers
             _buildingService = buildingService;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult Index()
         {
             //var host = new HostDto();
             //host.Id = 1;
@@ -38,6 +39,12 @@ namespace PingSite.Controllers
 
             //}
 
+            return RedirectToAction("Buildings");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Buildings()
+        {
             var buildings = await _buildingService.GetAllAsync();
 
             return View(buildings);

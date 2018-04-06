@@ -9,5 +9,6 @@ namespace PingSite.Core.Services
     public interface IBuildingService
     {
         Task<IEnumerable<BuildingDto>> GetAllAsync();
+        Task<bool> AddAsync(string name);
     }
 }
