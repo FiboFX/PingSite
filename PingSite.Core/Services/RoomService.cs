@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PingSite.Core.DTO;
+using PingSite.Core.Models;
 using PingSite.Core.Repositories;
 
 namespace PingSite.Core.Services
@@ -33,6 +34,16 @@ namespace PingSite.Core.Services
             }
 
             return buildingRoomsDto;
+        }
+
+        public async Task<bool> AddAsync(string name, int buildingId)
+        {
+            var building = await _buildingRepository.GetAsync(buildingId);
+            var room = Room.Create(null, name, building);
+
+            await _roomRepository.AddAsync(room);
+
+            return true;
         }
     }
 }

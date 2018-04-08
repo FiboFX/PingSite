@@ -1,0 +1,21 @@
+﻿@model PingSite.Models.Room.AddRoom
+
+<div class="row">
+    <div class="col-lg" style="text-align: center;">
+        <h1>Add Room</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(x => x.BuildingId)
+            <div class="form-group">
+                <label>Name</label>
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-success">Add</button>
+        }
+    </div>
+</div>
