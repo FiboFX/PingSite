@@ -33,5 +33,19 @@ namespace PingSite.Controllers
 
             return RedirectToAction("Rooms", "Home", new { id = addRoom.BuildingId });
         }
+
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditRoom editRoom)
+        {
+            var status = await _roomService.EditAsync(editRoom.Id, editRoom.Name);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

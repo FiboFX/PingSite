@@ -45,5 +45,18 @@ namespace PingSite.Core.Services
 
             return true;
         }
+
+        public async Task<bool> EditAsync(int id, string name)
+        {
+            var room = await _roomRepository.GetAsync(id);
+            if(room == null)
+            {
+                return false;
+            }
+
+            room.SetName(name);
+            await _roomRepository.UpdateAsync(room);
+            return true;
+        }
     }
 }

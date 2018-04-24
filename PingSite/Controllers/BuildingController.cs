@@ -31,7 +31,7 @@ namespace PingSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet()]
+        [HttpGet]
         public IActionResult Edit()
         {
             return View();

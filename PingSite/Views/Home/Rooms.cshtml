@@ -16,7 +16,7 @@
                     <div class="list">
                         <img src="~/images/room.png" width="30" height="37"> <a href="#">@r.Name</a>
                         <div class="options">
-                            <a href="#" class="btn btn-outline-primary">Edit</a>
+                            <a asp-controller="Room" asp-action="Edit" asp-route-id="@r.Id" class="btn btn-outline-primary">Edit</a>
                             <a href="#" class="btn btn-outline-primary">Delete</a>
                         </div>
                     </div>
