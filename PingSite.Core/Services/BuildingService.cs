@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PingSite.Core.DTO;
@@ -11,10 +12,14 @@ namespace PingSite.Core.Services
     public class BuildingService : IBuildingService
     {
         private readonly IBuildingRepository _buildingRepository;
+        private readonly IRoomRepository _roomRepository;
+        private readonly IHostRepository _hostRepository;
 
-        public BuildingService(IBuildingRepository buildingRepository)
+        public BuildingService(IBuildingRepository buildingRepository, IRoomRepository roomRepository, IHostRepository hostRepository)
         {
             _buildingRepository = buildingRepository;
+            _roomRepository = roomRepository;
+            _hostRepository = hostRepository;
         }
 
         public async Task<IEnumerable<BuildingDto>> GetAllAsync()
@@ -57,6 +62,26 @@ namespace PingSite.Core.Services
             if(building == null)
             {
                 return false;
+            }
+            var rooms = await _roomRepository.GetAllAsync();
+            var buildingRooms = rooms.Where(x => x.Building == building);
+
+            if(buildingRooms != null)
+            {
+                foreach (var room in buildingRooms)
+                {
+                    var allHosts = await _hostRepository.GetAllAsync();
+                    var hosts = allHosts.Where(x => x.Room == room);
+                    if (hosts != null)
+                    {
+                        foreach (var host in hosts)
+                        {
+                            await _hostRepository.RemoveAsync(host);
+                        }
+                    }
+
+                    await _roomRepository.RemoveAsync(room);
+                }
             }
 
             await _buildingRepository.RemoveAsync(building);
