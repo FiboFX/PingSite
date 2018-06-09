@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg">
                     <div class="list">
-                        <img src="~/images/room.png" width="30" height="37"> <a href="#">@r.Name</a>
+                        <img src="~/images/room.png" width="30" height="37"> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@r.Id">@r.Name</a>
                         <div class="options">
                             <a asp-controller="Room" asp-action="Edit" asp-route-id="@r.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Edit</a>
                             <a asp-controller="Room" asp-action="Delete" asp-route-id="@r.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Delete</a>

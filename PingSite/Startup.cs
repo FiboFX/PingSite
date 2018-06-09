@@ -37,6 +37,7 @@ namespace PingSite
 
             services.AddScoped<IBuildingService, BuildingService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IHostService, HostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

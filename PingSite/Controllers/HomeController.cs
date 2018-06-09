@@ -16,11 +16,13 @@ namespace PingSite.Controllers
     {
         private readonly IBuildingService _buildingService;
         private readonly IRoomService _roomService;
+        private readonly IHostService _hostService;
 
-        public HomeController(IBuildingService buildingService, IRoomService roomService)
+        public HomeController(IBuildingService buildingService, IRoomService roomService, IHostService hostService)
         {
             _buildingService = buildingService;
             _roomService = roomService;
+            _hostService = hostService;
         }
 
         [HttpGet]
@@ -59,6 +61,13 @@ namespace PingSite.Controllers
             ViewBag.BuildingId = id;
 
             return View(rooms);
+        }
+
+        public async Task<IActionResult> Hosts(int id)
+        {
+            var hosts = await _hostService.GetAllAsync(id);
+
+            return View(hosts);
         }
     }
 }

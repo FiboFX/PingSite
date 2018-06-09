@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PingSite.Core.DTO.HostDto>
+
+<div class="row">
+    <div class="col-lg" style="text-align: center;">
+        <h1>Hosts</h1>
+        <a asp-controller="Room" asp-action="Add" asp-route-id="@ViewBag.BuildingId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg">
+        @foreach (var h in Model)
+        {
+            <div class="row">
+                <div class="col-lg">
+                    <div class="list">
+                        <img src="~/images/computer.png" width="37" height="37"> <a href="#">@h.Name</a>
+                        <div class="options">
+                            <a href="#" class="btn btn-outline-primary">Edit</a>
+                            <a href="#" class="btn btn-outline-primary">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
