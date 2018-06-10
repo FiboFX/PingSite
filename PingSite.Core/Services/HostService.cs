@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using PingSite.Core.DTO;
+using PingSite.Core.Models;
 using PingSite.Core.Repositories;
 
 namespace PingSite.Core.Services
@@ -12,11 +14,13 @@ namespace PingSite.Core.Services
     {
         private readonly IHostRepository _hostRepository;
         private readonly IRoomRepository _roomRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public HostService(IHostRepository hostRepository, IRoomRepository roomRepository)
+        public HostService(IHostRepository hostRepository, IRoomRepository roomRepository, ICategoryRepository categoryRepository)
         {
             _hostRepository = hostRepository;
             _roomRepository = roomRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IEnumerable<HostDto>> GetAllAsync(int id)
@@ -37,5 +41,29 @@ namespace PingSite.Core.Services
 
             return hostsDto;
         }
+
+        public async Task<bool> AddAsync(string name, string address, int roomId, int categoryId)
+        {
+            var room = await _roomRepository.GetAsync(roomId);
+            var category = await _categoryRepository.GetAsync(categoryId);
+            bool lastStatus = false;
+
+            Ping ping = new Ping();
+            try
+            {
+                PingReply reply = ping.Send(address);
+                lastStatus = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+
+            }
+
+            var host = Host.Create(null, name, address, lastStatus, category, room);
+            await _hostRepository.AddAsync(host);
+
+            return true;
+        }
+
     }
 }

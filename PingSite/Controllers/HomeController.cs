@@ -66,6 +66,7 @@ namespace PingSite.Controllers
         public async Task<IActionResult> Hosts(int id)
         {
             var hosts = await _hostService.GetAllAsync(id);
+            ViewBag.RoomId = id;
 
             return View(hosts);
         }
