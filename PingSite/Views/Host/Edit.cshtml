@@ -1,0 +1,28 @@
+﻿@model PingSite.Models.Host.EditHost
+
+<div class="row">
+    <div class="col-lg" style="text-align: center;">
+        <h1>Edit Host</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                <label>Name</label>
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                @Html.DropDownListFor(x => x.CategoryId, Model.Categories, new { @class = "form-control"})
+            </div>
+            <button type="submit" class="btn btn-success">Change</button>
+        }
+    </div>
+</div>

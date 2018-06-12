@@ -24,7 +24,7 @@
                             <span style="color: red"><b>@h.Name</b></span>
                         }
                         <div class="options">
-                            <a href="#" class="btn btn-outline-primary">Edit</a>
+                            <a asp-controller="Host" asp-action="Edit" asp-route-id="@h.Id" asp-route-roomId="@ViewBag.RoomId" class="btn btn-outline-primary">Edit</a>
                             <a href="#" class="btn btn-outline-primary">Delete</a>
                         </div>
                     </div>

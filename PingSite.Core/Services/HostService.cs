@@ -23,6 +23,21 @@ namespace PingSite.Core.Services
             _categoryRepository = categoryRepository;
         }
 
+        public async Task<HostDto> GetAsync(int id)
+        {
+            var host = await _hostRepository.GetAsync(id);
+            
+            var hostDto = new HostDto()
+            {
+                Id = host.Id,
+                Name = host.Name,
+                Address = host.Address,
+                CategoryId = host.Category.Id
+            };
+
+            return hostDto;
+        }
+        
         public async Task<IEnumerable<HostDto>> GetAllAsync(int id)
         {
             var room = await _roomRepository.GetAsync(id);
@@ -65,5 +80,33 @@ namespace PingSite.Core.Services
             return true;
         }
 
+        public async Task<bool> EditAsync(int id, string name, string address, int roomId, int categoryId)
+        {
+            var host = await _hostRepository.GetAsync(id);
+            var category = await _categoryRepository.GetAsync(categoryId);
+            var room = await _roomRepository.GetAsync(roomId);
+            bool lastStatus = false;
+
+            host.SetName(name);
+            host.SetAddress(address);
+            host.SetCategory(category);
+            host.SetRoom(room);
+
+            Ping ping = new Ping();
+            try
+            {
+                PingReply reply = ping.Send(address);
+                lastStatus = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+
+            }
+            host.SetLastStatus(lastStatus);
+
+            await _hostRepository.UpdateAsync(host);
+
+            return true;
+        }
     }
 }

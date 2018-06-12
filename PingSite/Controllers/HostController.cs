@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PingSite.Core.Services;
 using PingSite.Models.Host;
 
@@ -28,11 +29,40 @@ namespace PingSite.Controllers
             return View(addHost);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Add(AddHost addHost)
         {
             var status = await _hostService.AddAsync(addHost.Name, addHost.Address, addHost.RoomId, addHost.CategoryId);
 
             return RedirectToAction("Hosts", "Home", new { id = addHost.RoomId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var host = await _hostService.GetAsync(id);
+            EditHost editHost = new EditHost()
+            {
+                Id = id,
+                Name = host.Name,
+                Address = host.Address,
+                CategoryId = (int)host.CategoryId
+            };
+            var categories = await _categoryService.GetAllAsync();
+            foreach(var category in categories)
+            {
+                editHost.Categories.Add(new SelectListItem() { Text = category.Name, Value = category.Id.ToString() });
+            }
+
+            return View(editHost);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditHost editHost)
+        {
+            var status = await _hostService.EditAsync(editHost.Id, editHost.Name, editHost.Address, editHost.RoomId, editHost.CategoryId);
+
+            return RedirectToAction("Hosts", "Home", new { id = editHost.RoomId });
         }
     }
 }
