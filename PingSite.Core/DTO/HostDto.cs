@@ -11,5 +11,6 @@ namespace PingSite.Core.DTO
         public string Address { get; set; }
         public bool LastStatus { get; set; }
         public int? CategoryId { get; set; }
+        public string ImgUrl { get; set; }
     }
 }
