@@ -44,6 +44,27 @@ namespace PingSite.Core.Models
             Address = address;
         }
 
+        public void SetLastStatus(bool status)
+        {
+            LastStatus = status;
+        }
+
+        public void SetCategory(Category category)
+        {
+            if(category != null)
+            {
+                Category = category;
+            }
+        }
+
+        public void SetRoom(Room room)
+        {
+            if(room != null)
+            {
+                Room = room;
+            }
+        }
+
         public static Host Create(int? id, string name, string address, bool lastStatus, Category category, Room room)
             => new Host(id, name, address, lastStatus, category, room);
     }
