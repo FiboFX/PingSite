@@ -45,7 +45,7 @@ namespace PingSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var status = await _buildingService.RemoveAsync(id);

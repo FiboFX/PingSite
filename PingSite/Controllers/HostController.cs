@@ -64,5 +64,13 @@ namespace PingSite.Controllers
 
             return RedirectToAction("Hosts", "Home", new { id = editHost.RoomId });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id, int roomId)
+        {
+            var status = await _hostService.RemoveAsync(id);
+
+            return RedirectToAction("Hosts", "Home", new { id = roomId });
+        }
     }
 }

@@ -88,5 +88,13 @@ namespace PingSite.Core.Services
 
             return true;
         }
+
+        public async Task<bool> RemoveAsync(int id)
+        {
+            var host = await _hostRepository.GetAsync(id);
+
+            await _hostRepository.RemoveAsync(host);
+            return true;
+        }
     }
 }
