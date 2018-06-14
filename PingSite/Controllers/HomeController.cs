@@ -28,21 +28,6 @@ namespace PingSite.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //var host = new HostDto();
-            //host.Id = 1;
-            //host.Address = "192.168.2.8";
-
-            //Ping ping = new Ping();
-            //try
-            //{
-            //    PingReply reply = ping.Send(host.Address);
-            //    host.LastStatus = reply.Status == IPStatus.Success;
-            //}
-            //catch (PingException)
-            //{
-
-            //}
-
             return RedirectToAction("Buildings");
         }
 

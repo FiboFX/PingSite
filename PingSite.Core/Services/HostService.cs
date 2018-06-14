@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PingSite.Core.DTO;
 using PingSite.Core.Models;
 using PingSite.Core.Repositories;
+using PingSite.Core.Tools;
 
 namespace PingSite.Core.Services
 {
@@ -62,18 +63,7 @@ namespace PingSite.Core.Services
         {
             var room = await _roomRepository.GetAsync(roomId);
             var category = await _categoryRepository.GetAsync(categoryId);
-            bool lastStatus = false;
-
-            Ping ping = new Ping();
-            try
-            {
-                PingReply reply = ping.Send(address);
-                lastStatus = reply.Status == IPStatus.Success;
-            }
-            catch (PingException)
-            {
-
-            }
+            bool lastStatus = PingTool.CheckPingStatus(address);
 
             var host = Host.Create(null, name, address, lastStatus, category, room);
             await _hostRepository.AddAsync(host);
@@ -86,23 +76,12 @@ namespace PingSite.Core.Services
             var host = await _hostRepository.GetAsync(id);
             var category = await _categoryRepository.GetAsync(categoryId);
             var room = await _roomRepository.GetAsync(roomId);
-            bool lastStatus = false;
+            bool lastStatus = PingTool.CheckPingStatus(address);
 
             host.SetName(name);
             host.SetAddress(address);
             host.SetCategory(category);
             host.SetRoom(room);
-
-            Ping ping = new Ping();
-            try
-            {
-                PingReply reply = ping.Send(address);
-                lastStatus = reply.Status == IPStatus.Success;
-            }
-            catch (PingException)
-            {
-
-            }
             host.SetLastStatus(lastStatus);
 
             await _hostRepository.UpdateAsync(host);
