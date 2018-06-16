@@ -35,7 +35,7 @@ namespace PingSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int buildingId)
+        public IActionResult Edit(int buildingId = 0)
         {
             var editRoom = new EditRoom() { BuildingId = buildingId };
             return View(editRoom);
@@ -46,7 +46,14 @@ namespace PingSite.Controllers
         {
             var status = await _roomService.EditAsync(editRoom.Id, editRoom.Name);
 
-            return RedirectToAction("Rooms", "Home", new { id = editRoom.BuildingId });
+            if(editRoom.BuildingId == 0)
+            {
+                return RedirectToAction("AllRooms", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Rooms", "Home", new { id = editRoom.BuildingId });
+            }
         }
 
         [HttpGet]

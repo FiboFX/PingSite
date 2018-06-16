@@ -51,6 +51,14 @@ namespace PingSite.Controllers
             return View(rooms);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AllRooms()
+        {
+            var rooms = await _roomService.GetAllAsync();
+
+            return View(rooms);
+        }
+
         public async Task<IActionResult> Hosts(int id)
         {
             ListHosts listHosts = new ListHosts();

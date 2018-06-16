@@ -3,20 +3,18 @@
 <div class="container container-back">
     <div class="row">
         <div class="col-lg" style="text-align: center;">
-            <h1>Rooms</h1>
-            <a asp-controller="Room" asp-action="Add" asp-route-id="@ViewBag.BuildingId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
+            <h1>All rooms</h1>
         </div>
     </div>
-
-    @foreach (var room in Model)
+    @foreach(var room in Model)
     {
         <div class="row">
             <div class="col-lg">
                 <div class="list">
-                    <img src="~/images/room.png" width="30" height="37"> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@room.Id">@room.Name</a>
+                    <img src="~/images/room.png" width="30" height="37" /> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@room.Id">@room.Name</a>
                     <div class="options">
-                        <a asp-controller="Room" asp-action="Edit" asp-route-id="@room.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Edit</a>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@room.Id?roomId=@ViewBag.BuildingId')">
+                        <a asp-controller="Room" asp-action="Edit" asp-route-id="@room.Id" class="btn btn-outline-primary">Edit</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@room.Id')">
                             Delete
                         </button>
                     </div>
@@ -30,7 +28,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete Room</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Delete Building</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
