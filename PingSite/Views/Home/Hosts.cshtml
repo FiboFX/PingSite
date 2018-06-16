@@ -1,50 +1,53 @@
 ﻿@model PingSite.Models.Host.ListHosts
 
-<div class="row">
-    <div class="col-lg" style="text-align: center;">
-        <h1>Hosts</h1>
-        <a asp-controller="Host" asp-action="Add" asp-route-id="@ViewBag.RoomId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
-    </div>
-</div>
-
-@foreach (var category in Model.Categories)
-{
-    @if (Model.Hosts.Where(x => x.CategoryId == category.Id).Count() > 0)
-    {
-        <div class="row" style="padding: 15px;">
-            <div class="col-lg">
-                <h3>@category.Name</h3>
-            </div>
+<div class="container container-back">
+    <div class="row">
+        <div class="col-lg" style="text-align: center;">
+            <h1>Hosts</h1>
+            <a asp-controller="Host" asp-action="Add" asp-route-id="@ViewBag.RoomId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
         </div>
-    }
-    @foreach (var host in Model.Hosts)
+    </div>
+
+    @foreach (var category in Model.Categories)
     {
-        @if (category.Id == host.CategoryId)
+        @if (Model.Hosts.Where(x => x.CategoryId == category.Id).Count() > 0)
         {
-            <div class="row">
+            <div class="row" style="padding: 15px;">
                 <div class="col-lg">
-                    <div class="list">
-                        <img src="@host.ImgUrl" width="37" height="37">
-                        @if (host.LastStatus)
-                        {
-                            <span style="color: green"><b>@host.Name</b></span>
-                        }
-                        else
-                        {
-                            <span style="color: red"><b>@host.Name</b></span>
-                        }
-                        <div class="options">
-                            <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@ViewBag.RoomId" class="btn btn-outline-primary">Edit</a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@ViewBag.RoomId')">
-                                Delete
-                            </button>
-                        </div>
-                    </div>
+                    <h3>@category.Name</h3>
                 </div>
             </div>
         }
+        @foreach (var host in Model.Hosts)
+        {
+            @if (category.Id == host.CategoryId)
+            {
+                <div class="row">
+                    <div class="col-lg">
+                        <div class="list">
+                            <img src="@host.ImgUrl" width="37" height="37">
+                            @if (host.LastStatus)
+                            {
+                                <span style="color: green"><b>@host.Name</b></span>
+                            }
+                            else
+                            {
+                                <span style="color: red"><b>@host.Name</b></span>
+                            }
+                            <div class="options">
+                                <a href="#" class="btn btn-outline-success">Details</a>
+                                <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@ViewBag.RoomId" class="btn btn-outline-primary">Edit</a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@ViewBag.RoomId')">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     }
-}
+</div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

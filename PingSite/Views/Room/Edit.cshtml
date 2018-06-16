@@ -1,14 +1,16 @@
 @model PingSite.Models.Room.EditRoom
 
-<div class="row">
-    <div class="col-lg">
-        @using(Html.BeginForm())
-        {
-            <div class="form-group">
-                <label>Name</label>
-                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-            </div>
-            <button type="submit" class="btn btn-success">Change</button>
-        }
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group">
+                    <label>Name</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                </div>
+                <button type="submit" class="btn btn-success">Change</button>
+            }
+        </div>
     </div>
 </div>

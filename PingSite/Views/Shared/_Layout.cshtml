@@ -4,8 +4,9 @@
     <title>PingSite</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
+
     <link rel="stylesheet" href="~/css/fontawesome-all.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/site.css" type="text/css" />
 </head>
 <body>
 
@@ -29,11 +30,11 @@
         </div>
     </nav>
 
+    @RenderBody()
+
     <div class="container">
-        @RenderBody()
-        
         <div class="row">
-            <div class="col-lg" style="text-align: center;">
+            <div class="col-lg footer">
                 Website by Karol Knieć &copy; 2018.
             </div>
         </div>

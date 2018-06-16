@@ -1,28 +1,30 @@
 ﻿@model IEnumerable<PingSite.Core.DTO.RoomDto>
 
-<div class="row">
-    <div class="col-lg" style="text-align: center;">
-        <h1>Rooms</h1>
-        <a asp-controller="Room" asp-action="Add" asp-route-id="@ViewBag.BuildingId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
-    </div>
-</div>
-
-@foreach (var r in Model)
-{
+<div class="container container-back">
     <div class="row">
-        <div class="col-lg">
-            <div class="list">
-                <img src="~/images/room.png" width="30" height="37"> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@r.Id">@r.Name</a>
-                <div class="options">
-                    <a asp-controller="Room" asp-action="Edit" asp-route-id="@r.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Edit</a>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@r.Id?roomId=@ViewBag.BuildingId')">
-                        Delete
-                    </button>
+        <div class="col-lg" style="text-align: center;">
+            <h1>Rooms</h1>
+            <a asp-controller="Room" asp-action="Add" asp-route-id="@ViewBag.BuildingId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
+        </div>
+    </div>
+
+    @foreach (var r in Model)
+    {
+        <div class="row">
+            <div class="col-lg">
+                <div class="list">
+                    <img src="~/images/room.png" width="30" height="37"> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@r.Id">@r.Name</a>
+                    <div class="options">
+                        <a asp-controller="Room" asp-action="Edit" asp-route-id="@r.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Edit</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@r.Id?roomId=@ViewBag.BuildingId')">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
