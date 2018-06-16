@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PingSite.Core.DTO.HostDto>
+﻿@model PingSite.Models.Host.ListHosts
 
 <div class="row">
     <div class="col-lg" style="text-align: center;">
@@ -7,29 +7,43 @@
     </div>
 </div>
 
-@foreach (var h in Model)
+@foreach (var category in Model.Categories)
 {
-    <div class="row">
-        <div class="col-lg">
-            <div class="list">
-                <img src="@h.ImgUrl" width="37" height="37">
-                @if (h.LastStatus)
-                {
-                    <span style="color: green"><b>@h.Name</b></span>
-                }
-                else
-                {
-                    <span style="color: red"><b>@h.Name</b></span>
-                }
-                <div class="options">
-                    <a asp-controller="Host" asp-action="Edit" asp-route-id="@h.Id" asp-route-roomId="@ViewBag.RoomId" class="btn btn-outline-primary">Edit</a>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@h.Id?roomId=@ViewBag.RoomId')">
-                        Delete
-                    </button>
-                </div>
+    @if (Model.Hosts.Where(x => x.CategoryId == category.Id).Count() > 0)
+    {
+        <div class="row" style="padding: 15px;">
+            <div class="col-lg">
+                <h3>@category.Name</h3>
             </div>
         </div>
-    </div>
+    }
+    @foreach (var host in Model.Hosts)
+    {
+        @if (category.Id == host.CategoryId)
+        {
+            <div class="row">
+                <div class="col-lg">
+                    <div class="list">
+                        <img src="@host.ImgUrl" width="37" height="37">
+                        @if (host.LastStatus)
+                        {
+                            <span style="color: green"><b>@host.Name</b></span>
+                        }
+                        else
+                        {
+                            <span style="color: red"><b>@host.Name</b></span>
+                        }
+                        <div class="options">
+                            <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@ViewBag.RoomId" class="btn btn-outline-primary">Edit</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@ViewBag.RoomId')">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 }
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

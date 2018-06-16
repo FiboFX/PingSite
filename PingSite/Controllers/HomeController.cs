@@ -9,6 +9,7 @@ using PingSite.Core.DTO;
 using PingSite.Core.Repositories;
 using PingSite.Core.Services;
 using PingSite.Models;
+using PingSite.Models.Host;
 
 namespace PingSite.Controllers
 {
@@ -17,12 +18,14 @@ namespace PingSite.Controllers
         private readonly IBuildingService _buildingService;
         private readonly IRoomService _roomService;
         private readonly IHostService _hostService;
+        private readonly ICategoryService _categoryService;
 
-        public HomeController(IBuildingService buildingService, IRoomService roomService, IHostService hostService)
+        public HomeController(IBuildingService buildingService, IRoomService roomService, IHostService hostService, ICategoryService categoryService)
         {
             _buildingService = buildingService;
             _roomService = roomService;
             _hostService = hostService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -50,10 +53,12 @@ namespace PingSite.Controllers
 
         public async Task<IActionResult> Hosts(int id)
         {
-            var hosts = await _hostService.GetAllAsync(id);
+            ListHosts listHosts = new ListHosts();
+            listHosts.Hosts = await _hostService.GetAllAsync(id);
+            listHosts.Categories = await _categoryService.GetAllAsync();
             ViewBag.RoomId = id;
 
-            return View(hosts);
+            return View(listHosts);
         }
     }
 }
