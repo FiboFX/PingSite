@@ -38,7 +38,7 @@ namespace PingSite.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, int roomId, bool allHosts = false)
         {
             var host = await _hostService.GetAsync(id);
             EditHost editHost = new EditHost()
@@ -46,7 +46,9 @@ namespace PingSite.Controllers
                 Id = id,
                 Name = host.Name,
                 Address = host.Address,
-                CategoryId = (int)host.CategoryId
+                CategoryId = (int)host.CategoryId,
+                RoomId = roomId,
+                AllHosts = allHosts
             };
             var categories = await _categoryService.GetAllAsync();
             foreach(var category in categories)
@@ -61,6 +63,11 @@ namespace PingSite.Controllers
         public async Task<IActionResult> Edit(EditHost editHost)
         {
             var status = await _hostService.EditAsync(editHost.Id, editHost.Name, editHost.Address, editHost.RoomId, editHost.CategoryId);
+
+            if(editHost.AllHosts)
+            {
+                return RedirectToAction("AllHosts", "Home");
+            }
 
             return RedirectToAction("Hosts", "Home", new { id = editHost.RoomId });
         }

@@ -20,11 +20,13 @@ namespace PingSite.Core.Repositories
         public async Task<Host> GetAsync(int id)
             => await _context.Hosts
                 .Include(x => x.Category)
+                .Include(x => x.Room)
                 .SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task<IEnumerable<Host>> GetAllAsync()
             => await _context.Hosts
                 .Include(x => x.Category)
+                .Include(x => x.Room)
                 .ToListAsync();
 
         public async Task AddAsync(Host host)

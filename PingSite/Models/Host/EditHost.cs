@@ -17,6 +17,7 @@ namespace PingSite.Models.Host
         [Required]
         public int CategoryId { get; set; }
         public int RoomId { get; set; }
+        public bool AllHosts { get; set; }
 
         public List<SelectListItem> Categories { get; set; }
 

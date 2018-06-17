@@ -59,12 +59,23 @@ namespace PingSite.Controllers
             return View(rooms);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Hosts(int id)
         {
             ListHosts listHosts = new ListHosts();
             listHosts.Hosts = await _hostService.GetAllAsync(id);
             listHosts.Categories = await _categoryService.GetAllAsync();
             ViewBag.RoomId = id;
+
+            return View(listHosts);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllHosts()
+        {
+            ListHosts listHosts = new ListHosts();
+            listHosts.Hosts = await _hostService.GetAllAsync();
+            listHosts.Categories = await _categoryService.GetAllAsync();
 
             return View(listHosts);
         }

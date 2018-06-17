@@ -27,19 +27,33 @@ namespace PingSite.Core.Services
         public async Task<HostDto> GetAsync(int id)
         {
             var host = await _hostRepository.GetAsync(id);
-            
+
             var hostDto = new HostDto()
             {
                 Id = host.Id,
                 Name = host.Name,
                 Address = host.Address,
                 CategoryId = host.Category.Id,
-                ImgUrl = host.Category.ImgUrl
+                ImgUrl = host.Category.ImgUrl,
+                RoomId = host.Room.Id
             };
 
             return hostDto;
         }
-        
+
+        public async Task<IEnumerable<HostDto>> GetAllAsync()
+        {
+            var allHosts = await _hostRepository.GetAllAsync();
+
+            List<HostDto> hostsDto = new List<HostDto>();
+            foreach (var host in allHosts)
+            {
+                hostsDto.Add(new HostDto() { Id = host.Id, Name = host.Name, Address = host.Address, LastStatus = host.LastStatus, CategoryId = host.Category.Id, ImgUrl = host.Category.ImgUrl });
+            }
+
+            return hostsDto;
+        }
+
         public async Task<IEnumerable<HostDto>> GetAllAsync(int id)
         {
             var room = await _roomRepository.GetAsync(id);
