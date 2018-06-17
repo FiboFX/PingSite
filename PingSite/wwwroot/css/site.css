@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #dddddd;
+    background-color: #eeeeee;
 }
 
 .list
@@ -18,9 +18,9 @@
 .container-back{
     background-color: white;
     margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 15px;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 .footer {
