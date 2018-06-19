@@ -33,3 +33,12 @@ CREATE TABLE HostsHistory (
 	DateOnline DATETIME,
 	HostId INT NOT NULL FOREIGN KEY REFERENCES Hosts(Id)
 )
+
+CREATE TABLE Settings (
+	Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	Name NVARCHAR(50) NOT NULL,
+	Value INT NOT NULL
+)
+
+INSERT INTO Settings(Name, Value) VALUES('AutoPing', 0)
+INSERT INTO Settings(Name, Value) VALUES('AutoPingDelay', 1)

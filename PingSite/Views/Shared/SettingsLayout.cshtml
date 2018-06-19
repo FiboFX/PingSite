@@ -1,0 +1,29 @@
+﻿@{ 
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg" style="text-align: center; margin: 10px;">
+            <h1>Settings</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="list-group" style="margin-top: 20px;">
+                <a href="#" id="generalSettings" class="list-group-item list-group-item-action">
+                    <i class="fas fa-wrench"></i> General
+                </a>
+                <a href="#" id="categoriesSettings" class="list-group-item list-group-item-action">
+                    <i class="far fa-list-alt"></i> Categories
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-9 container-back">
+            @RenderBody()
+        </div>
+    </div>
+</div>
