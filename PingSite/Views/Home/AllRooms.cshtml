@@ -1,11 +1,14 @@
 ﻿@model IEnumerable<PingSite.Core.DTO.RoomDto>
 
-<div class="container container-back">
+<div class="container">
     <div class="row">
         <div class="col-lg" style="text-align: center;">
-            <h1>All rooms</h1>
+            <h1>All Rooms</h1>
         </div>
     </div>
+</div>
+
+<div class="container container-back">
     @foreach(var room in Model)
     {
         <div class="row">

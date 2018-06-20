@@ -1,12 +1,14 @@
 ﻿@model PingSite.Models.Host.ListHosts
 
-<div class="container container-back">
+<div class="container">
     <div class="row">
         <div class="col-lg" style="text-align: center;">
             <h1>All Hosts</h1>
         </div>
     </div>
+</div>
 
+<div class="container container-back">
     @foreach (var category in Model.Categories)
     {
         @if (Model.Hosts.Where(x => x.CategoryId == category.Id).Count() > 0)
