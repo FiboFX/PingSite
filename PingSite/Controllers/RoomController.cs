@@ -20,8 +20,10 @@ namespace PingSite.Controllers
         [HttpGet]
         public IActionResult Add(int id)
         {
-            var addRoom = new AddRoom();
-            addRoom.BuildingId = id;
+            var addRoom = new AddRoom
+            {
+                BuildingId = id
+            };
 
             return View(addRoom);
         }

@@ -21,10 +21,11 @@ namespace PingSite.Core.Services
         public async Task<Settings> GetAsync()
         {
             var settingsModel = await _settingRepository.GetAllAsync();
-            Settings settings = new Settings();
-
-            settings.AutoPing = GetSettingValue(settingsModel, "AutoPing") == "1";
-            settings.AutoPingDelay = GetSettingValue(settingsModel, "AutoPingDelay");
+            Settings settings = new Settings
+            {
+                AutoPing = GetSettingValue(settingsModel, "AutoPing") == "1",
+                AutoPingDelay = GetSettingValue(settingsModel, "AutoPingDelay")
+            };
 
             return settings;
         }

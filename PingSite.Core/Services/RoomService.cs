@@ -29,7 +29,7 @@ namespace PingSite.Core.Services
 
             foreach(var room in rooms)
             {
-                roomsDto.Add(new RoomDto()
+                roomsDto.Add(new RoomDto
                 {
                     Id = room.Id,
                     Name = room.Name
@@ -49,7 +49,11 @@ namespace PingSite.Core.Services
 
             foreach(var r in buildingRooms)
             {
-                buildingRoomsDto.Add(new RoomDto() { Id = r.Id, Name = r.Name });
+                buildingRoomsDto.Add(new RoomDto
+                {
+                    Id = r.Id,
+                    Name = r.Name
+                });
             }
 
             return buildingRoomsDto;

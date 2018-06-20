@@ -48,7 +48,15 @@ namespace PingSite.Core.Services
             List<HostDto> hostsDto = new List<HostDto>();
             foreach (var host in allHosts)
             {
-                hostsDto.Add(new HostDto() { Id = host.Id, Name = host.Name, Address = host.Address, LastStatus = host.LastStatus, CategoryId = host.Category.Id, ImgUrl = host.Category.ImgUrl });
+                hostsDto.Add(new HostDto
+                {
+                    Id = host.Id,
+                    Name = host.Name,
+                    Address = host.Address,
+                    LastStatus = host.LastStatus,
+                    CategoryId = host.Category.Id,
+                    ImgUrl = host.Category.ImgUrl
+                });
             }
 
             return hostsDto;
@@ -67,7 +75,15 @@ namespace PingSite.Core.Services
             List<HostDto> hostsDto = new List<HostDto>();
             foreach(var host in hosts)
             {
-                hostsDto.Add(new HostDto() { Id = host.Id, Name = host.Name, Address = host.Address, LastStatus = host.LastStatus, CategoryId = host.Category.Id, ImgUrl = host.Category.ImgUrl });
+                hostsDto.Add(new HostDto
+                {
+                    Id = host.Id,
+                    Name = host.Name,
+                    Address = host.Address,
+                    LastStatus = host.LastStatus,
+                    CategoryId = host.Category.Id,
+                    ImgUrl = host.Category.ImgUrl
+                });
             }
 
             return hostsDto;

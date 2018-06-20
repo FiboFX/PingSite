@@ -24,7 +24,11 @@ namespace PingSite.Controllers
         public async Task<IActionResult> Add(int id)
         {
             var categories = await _categoryService.GetAllAsync();
-            var addHost = new AddHost() { RoomId = id, Categories = categories };
+            var addHost = new AddHost
+            {
+                RoomId = id,
+                Categories = categories
+            };
 
             return View(addHost);
         }
@@ -41,7 +45,7 @@ namespace PingSite.Controllers
         public async Task<IActionResult> Edit(int id, int roomId, bool allHosts = false)
         {
             var host = await _hostService.GetAsync(id);
-            EditHost editHost = new EditHost()
+            EditHost editHost = new EditHost
             {
                 Id = id,
                 Name = host.Name,
@@ -53,7 +57,11 @@ namespace PingSite.Controllers
             var categories = await _categoryService.GetAllAsync();
             foreach(var category in categories)
             {
-                editHost.Categories.Add(new SelectListItem() { Text = category.Name, Value = category.Id.ToString() });
+                editHost.Categories.Add(new SelectListItem
+                {
+                    Text = category.Name,
+                    Value = category.Id.ToString()
+                });
             }
 
             return View(editHost);

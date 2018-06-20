@@ -23,7 +23,12 @@ namespace PingSite.Core.Services
 
             foreach(var category in categories)
             {
-                categoriesDto.Add(new CategoryDto() { Id = category.Id, Name = category.Name, ImgUrl = category.ImgUrl });
+                categoriesDto.Add(new CategoryDto
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    ImgUrl = category.ImgUrl
+                });
             }
 
             return categoriesDto;
