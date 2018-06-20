@@ -23,7 +23,7 @@ namespace PingSite.Core.Services
             var settingsModel = await _settingRepository.GetAllAsync();
             Settings settings = new Settings();
 
-            settings.AutoPing = GetSettingValue(settingsModel, "AutoPing") == 1;
+            settings.AutoPing = GetSettingValue(settingsModel, "AutoPing") == "1";
             settings.AutoPingDelay = GetSettingValue(settingsModel, "AutoPingDelay");
 
             return settings;
@@ -34,7 +34,7 @@ namespace PingSite.Core.Services
             throw new NotImplementedException();
         }
 
-        private int GetSettingValue(IEnumerable<Setting> settingsModel, string settingName)
+        private string GetSettingValue(IEnumerable<Setting> settingsModel, string settingName)
         {
             var setting = settingsModel.Select(x => x).Where(y => y.Name == settingName).ToList();
 

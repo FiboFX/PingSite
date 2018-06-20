@@ -37,8 +37,8 @@ CREATE TABLE HostsHistory (
 CREATE TABLE Settings (
 	Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	Name NVARCHAR(50) NOT NULL,
-	Value INT NOT NULL
+	Value NVARCHAR(50) NOT NULL
 )
 
-INSERT INTO Settings(Name, Value) VALUES('AutoPing', 0)
-INSERT INTO Settings(Name, Value) VALUES('AutoPingDelay', 1)
+INSERT INTO Settings(Name, Value) VALUES('AutoPing', '0')
+INSERT INTO Settings(Name, Value) VALUES('AutoPingDelay', '1')

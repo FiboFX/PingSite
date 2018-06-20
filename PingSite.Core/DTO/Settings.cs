@@ -7,6 +7,6 @@ namespace PingSite.Core.DTO
     public class Settings
     {
         public bool AutoPing { get; set; }
-        public int AutoPingDelay { get; set; }
+        public string AutoPingDelay { get; set; }
     }
 }
