@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PingSite.Core.DTO;
 using PingSite.Core.Services;
 
 namespace PingSite.Controllers
@@ -22,6 +23,14 @@ namespace PingSite.Controllers
             var settings = await _settingService.GetAsync();
 
             return View(settings);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> General(Settings settings)
+        {
+            await _settingService.UpdateAsync(settings);
+
+            return RedirectToAction("General");
         }
     }
 }

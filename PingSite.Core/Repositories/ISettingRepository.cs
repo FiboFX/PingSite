@@ -8,6 +8,7 @@ namespace PingSite.Core.Repositories
 {
     public interface ISettingRepository
     {
+        Task<Setting> GetAsync(string name);
         Task<IEnumerable<Setting>> GetAllAsync();
         Task UpdateAsync(Setting setting);
     }

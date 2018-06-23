@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace PingSite
 
             services.AddDbContext<PingSiteContext>(
                 options => options.UseSqlServer(Configuration["Sql:ConnectionString"]));
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration["Sql:ConnectionString"]));
 
             services.AddScoped<IBuildingRepository, BuildingRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
@@ -57,6 +59,8 @@ namespace PingSite
             }
 
             app.UseStaticFiles();
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
 
             app.UseMvc(routes =>
             {

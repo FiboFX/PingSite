@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hangfire;
 using PingSite.Core.DTO;
 using PingSite.Core.Models;
 using PingSite.Core.Repositories;
+using PingSite.Core.Tools;
 
 namespace PingSite.Core.Services
 {
@@ -23,23 +25,43 @@ namespace PingSite.Core.Services
             var settingsModel = await _settingRepository.GetAllAsync();
             Settings settings = new Settings
             {
-                AutoPing = GetSettingValue(settingsModel, "AutoPing") == "1",
-                AutoPingDelay = GetSettingValue(settingsModel, "AutoPingDelay")
+                AutoPing = SettingsTool.GetSettingValue(settingsModel, "AutoPing") == "1",
+                AutoPingDelay = SettingsTool.GetSettingValue(settingsModel, "AutoPingDelay")
             };
 
             return settings;
         }
 
-        public Task UpdateAsync(Settings settings)
+        public async Task UpdateAsync(Settings settings)
         {
-            throw new NotImplementedException();
-        }
+            var settingsList = settings.GetType().GetProperties();
 
-        private string GetSettingValue(IEnumerable<Setting> settingsModel, string settingName)
-        {
-            var setting = settingsModel.Select(x => x).Where(y => y.Name == settingName).ToList();
+            foreach(var setting in settingsList)
+            {
+                var settingModel = await _settingRepository.GetAsync(setting.Name);
+                
+                if(setting.Name == "AutoPing")
+                {
+                    if(settings.AutoPing)
+                    {
+                        var delay = settings.AutoPingDelay;
+                        settingModel.Value = "1";
+                        RecurringJob.AddOrUpdate<AutoPingTool>("AutoPing", x => x.PingHost(), $"*/{delay} * * * *");
+                    }
+                    else
+                    {
+                        settingModel.Value = "0";
+                        RecurringJob.RemoveIfExists("AutoPing");
+                    }
+                }
+                else
+                {
+                    var settingValue = settingsList.FirstOrDefault(x => x.Name == setting.Name);
+                    settingModel.Value = (string)settingValue.GetValue(settings, null);
+                }
 
-            return setting[0].Value;
+                await _settingRepository.UpdateAsync(settingModel);
+            }
         }
     }
 }
