@@ -39,20 +39,31 @@ namespace PingSite.Core.Services
             foreach(var setting in settingsList)
             {
                 var settingModel = await _settingRepository.GetAsync(setting.Name);
-                
-                if(setting.Name == "AutoPing")
+                var settingValueType = setting.GetValue(settings, null).GetType();
+
+                if (setting.Name == "AutoPing")
                 {
                     if(settings.AutoPing)
                     {
                         var delay = settings.AutoPingDelay;
-                        settingModel.Value = "1";
                         RecurringJob.AddOrUpdate<AutoPingTool>("AutoPing", x => x.PingHost(), $"*/{delay} * * * *");
                     }
                     else
                     {
-                        settingModel.Value = "0";
                         RecurringJob.RemoveIfExists("AutoPing");
                     }
+                }
+                if(typeof(bool) == settingValueType)
+                {
+                    if((bool)setting.GetValue(settings, null))
+                    {
+                        settingModel.Value = "1";
+                    }
+                    else
+                    {
+                        settingModel.Value = "0";
+                    }
+
                 }
                 else
                 {
