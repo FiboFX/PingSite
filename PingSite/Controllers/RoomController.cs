@@ -63,7 +63,14 @@ namespace PingSite.Controllers
         {
             var status = await _roomService.RemoveAsync(id);
 
-            return RedirectToAction("Rooms", "Home", new { id = buildingId });
+            if(buildingId == 0)
+            {
+                return RedirectToAction("AllRooms", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Rooms", "Home", new { id = buildingId });
+            }
         }
     }
 }

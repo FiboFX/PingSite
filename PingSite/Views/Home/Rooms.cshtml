@@ -23,7 +23,7 @@
                     <img src="~/images/room.png" width="30" height="37"> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@room.Id">@room.Name</a>
                     <div class="options">
                         <a asp-controller="Room" asp-action="Edit" asp-route-id="@room.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Edit</a>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@room.Id?roomId=@ViewBag.BuildingId')">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@room.Id?buildingId=@ViewBag.BuildingId')">
                             Delete
                         </button>
                     </div>
