@@ -21,6 +21,14 @@ namespace PingSite.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var host = await _hostService.GetAsync(id);
+
+            return View(host);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Add(int id)
         {
             var categories = await _categoryService.GetAllAsync();

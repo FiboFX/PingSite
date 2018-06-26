@@ -1,0 +1,63 @@
+﻿@model PingSite.Core.DTO.HostDto
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg" style="text-align: center">
+            <h1>@Model.Name</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container container-back">
+    <div class="row">
+        <div class="col-lg" style="text-align: center;">
+            <h3>Details</h3>
+
+            <table class="table table-bordered host-details-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Detail
+                        </th>
+                        <th>
+                            Value
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>@Model.Name</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>@Model.Address</td>
+                    </tr>
+                    <tr>
+                        <td>Last status</td>
+                        <td>
+                            @if (Model.LastStatus)
+                            {
+                                <span style="color: green; font-weight: bold;">ONLINE</span>
+                            }
+                            else
+                            {
+                                <span style="color: red; font-weight: bold;">OFFLINE</span>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td>
+                            <img src="@Model.Category.ImgUrl" width="30" height="30" /> @Model.Category.Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Room</td>
+                        <td>@Model.Room.Name</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>  
+    </div>
+</div>
