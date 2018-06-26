@@ -32,17 +32,21 @@ namespace PingSite
                 options => options.UseSqlServer(Configuration["Sql:ConnectionString"]));
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration["Sql:ConnectionString"]));
 
+            // Repositories
             services.AddScoped<IBuildingRepository, BuildingRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IHostRepository, HostRepository>();
             services.AddScoped<ISettingRepository, SettingRepository>();
+            services.AddScoped<IHostHistoryRepository, HostHistoryRepository>();
 
+            // Services
             services.AddScoped<IBuildingService, BuildingService>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IHostService, HostService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<IHostHistoryService, HostHistoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,9 +1,9 @@
-﻿@model PingSite.Core.DTO.HostDto
+﻿@model PingSite.Models.Host.DetailsHost
 
 <div class="container">
     <div class="row">
         <div class="col-lg" style="text-align: center">
-            <h1>@Model.Name</h1>
+            <h1>@Model.Host.Name</h1>
         </div>
     </div>
 </div>
@@ -11,8 +11,8 @@
 <div class="container container-back">
     <div class="row">
         <div class="col-lg" style="text-align: center;">
+            
             <h3>Details</h3>
-
             <table class="table table-bordered host-details-table">
                 <thead class="thead-dark">
                     <tr>
@@ -27,16 +27,16 @@
                 <tbody>
                     <tr>
                         <td>Name</td>
-                        <td>@Model.Name</td>
+                        <td>@Model.Host.Name</td>
                     </tr>
                     <tr>
                         <td>Address</td>
-                        <td>@Model.Address</td>
+                        <td>@Model.Host.Address</td>
                     </tr>
                     <tr>
                         <td>Last status</td>
                         <td>
-                            @if (Model.LastStatus)
+                            @if (Model.Host.LastStatus)
                             {
                                 <span style="color: green; font-weight: bold;">ONLINE</span>
                             }
@@ -49,15 +49,37 @@
                     <tr>
                         <td>Category</td>
                         <td>
-                            <img src="@Model.Category.ImgUrl" width="30" height="30" /> @Model.Category.Name
+                            <img src="@Model.Host.Category.ImgUrl" width="30" height="30" /> @Model.Host.Category.Name
                         </td>
                     </tr>
                     <tr>
                         <td>Room</td>
-                        <td>@Model.Room.Name</td>
+                        <td>@Model.Host.Room.Name</td>
                     </tr>
                 </tbody>
             </table>
+
+            <h3>Last 10 online status</h3>
+            <table class="table table-bordered host-history-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Lp.</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1; }
+                    @foreach(var history in Model.HostHistory)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@history.DateOnline</td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+
         </div>  
     </div>
 </div>

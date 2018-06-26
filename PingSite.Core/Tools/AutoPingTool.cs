@@ -1,4 +1,5 @@
 ﻿using PingSite.Core.Repositories;
+using PingSite.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,10 +10,12 @@ namespace PingSite.Core.Tools
     public class AutoPingTool
     {
         private readonly IHostRepository _hostRepository;
+        private readonly IHostHistoryService _hostHistoryService;
 
-        public AutoPingTool(IHostRepository hostRepository)
+        public AutoPingTool(IHostRepository hostRepository, IHostHistoryService hostHistoryService)
         {
             _hostRepository = hostRepository;
+            _hostHistoryService = hostHistoryService;
         }
 
         public async Task PingHost()
@@ -21,7 +24,12 @@ namespace PingSite.Core.Tools
 
             foreach(var host in hosts)
             {
-                host.SetLastStatus(PingTool.CheckPingStatus(host.Address));
+                var status = PingTool.CheckPingStatus(host.Address);
+                if(host.LastStatus == false && status == true)
+                {
+                    await _hostHistoryService.AddAsync(DateTime.Now, (int)host.Id);
+                }
+                host.SetLastStatus(status);
 
                 await _hostRepository.UpdateAsync(host);
             }

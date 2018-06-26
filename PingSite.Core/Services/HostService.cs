@@ -16,12 +16,14 @@ namespace PingSite.Core.Services
         private readonly IHostRepository _hostRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IHostHistoryService _hostHistoryService;
 
-        public HostService(IHostRepository hostRepository, IRoomRepository roomRepository, ICategoryRepository categoryRepository)
+        public HostService(IHostRepository hostRepository, IRoomRepository roomRepository, ICategoryRepository categoryRepository, IHostHistoryService hostHistoryService)
         {
             _hostRepository = hostRepository;
             _roomRepository = roomRepository;
             _categoryRepository = categoryRepository;
+            _hostHistoryService = hostHistoryService;
         }
 
         public async Task<HostDto> GetAsync(int id)
@@ -33,6 +35,7 @@ namespace PingSite.Core.Services
                 Id = host.Id,
                 Name = host.Name,
                 Address = host.Address,
+                LastStatus = host.LastStatus,
                 Category = new CategoryDto
                 {
                     Id = host.Category.Id,
@@ -61,6 +64,7 @@ namespace PingSite.Core.Services
                     Id = host.Id,
                     Name = host.Name,
                     Address = host.Address,
+                    LastStatus = host.LastStatus,
                     Category = new CategoryDto
                     {
                         Id = host.Category.Id,
@@ -96,6 +100,7 @@ namespace PingSite.Core.Services
                     Id = host.Id,
                     Name = host.Name,
                     Address = host.Address,
+                    LastStatus = host.LastStatus,
                     Category = new CategoryDto
                     {
                         Id = host.Category.Id,
@@ -147,6 +152,7 @@ namespace PingSite.Core.Services
         {
             var host = await _hostRepository.GetAsync(id);
 
+            await _hostHistoryService.RemoveAllAsync(id);
             await _hostRepository.RemoveAsync(host);
             return true;
         }

@@ -13,6 +13,7 @@ namespace PingSite.Core.EF
         public DbSet<Category> Categories { get; set; }
         public DbSet<Host> Hosts { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<HostHistory> HostsHistory { get; set; }
         
         public PingSiteContext(DbContextOptions<PingSiteContext> options) : base(options) { }
     }

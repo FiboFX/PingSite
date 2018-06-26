@@ -13,19 +13,27 @@ namespace PingSite.Controllers
     {
         private readonly IHostService _hostService;
         private readonly ICategoryService _categoryService;
+        private readonly IHostHistoryService _hostHistoryService;
 
-        public HostController(IHostService hostService, ICategoryService categoryService)
+        public HostController(IHostService hostService, ICategoryService categoryService, IHostHistoryService hostHistoryService)
         {
             _hostService = hostService;
             _categoryService = categoryService;
+            _hostHistoryService = hostHistoryService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var host = await _hostService.GetAsync(id);
+            var hostHistory = await _hostHistoryService.GetAllAsync(id);
+            var detailsHost = new DetailsHost
+            {
+                Host = host,
+                HostHistory = hostHistory
+            };
 
-            return View(host);
+            return View(detailsHost);
         }
 
         [HttpGet]
