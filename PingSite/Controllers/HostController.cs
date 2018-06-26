@@ -50,7 +50,7 @@ namespace PingSite.Controllers
                 Id = id,
                 Name = host.Name,
                 Address = host.Address,
-                CategoryId = (int)host.CategoryId,
+                CategoryId = (int)host.Category.Id,
                 RoomId = roomId,
                 AllHosts = allHosts
             };

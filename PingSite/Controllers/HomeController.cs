@@ -67,7 +67,6 @@ namespace PingSite.Controllers
                 Hosts = await _hostService.GetAllAsync(id),
                 Categories = await _categoryService.GetAllAsync()
             };
-            ViewBag.RoomId = id;
 
             return View(listHosts);
         }

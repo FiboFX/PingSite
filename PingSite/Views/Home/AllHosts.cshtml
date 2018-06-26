@@ -11,7 +11,7 @@
 <div class="container container-back">
     @foreach (var category in Model.Categories)
     {
-        @if (Model.Hosts.Where(x => x.CategoryId == category.Id).Count() > 0)
+        @if (Model.Hosts.Where(x => x.Category.Id == category.Id).Count() > 0)
         {
             <div class="row" style="padding: 15px;">
                 <div class="col-lg">
@@ -21,12 +21,12 @@
         }
         @foreach (var host in Model.Hosts)
         {
-            @if (category.Id == host.CategoryId)
+            @if (category.Id == host.Category.Id)
             {
                 <div class="row">
                     <div class="col-lg">
                         <div class="list">
-                            <img src="@host.ImgUrl" width="37" height="37">
+                            <img src="@host.Category.ImgUrl" width="37" height="37">
                             @if (host.LastStatus)
                             {
                                 <span style="color: green"><b>@host.Name</b></span>
@@ -36,9 +36,9 @@
                                 <span style="color: red"><b>@host.Name</b></span>
                             }
                             <div class="options">
-                                <a href="#" class="btn btn-outline-success">Details</a>
-                                <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@host.RoomId" asp-route-allHosts="true" class="btn btn-outline-primary">Edit</a>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@ViewBag.RoomId')">
+                                <a asp-controller="Host" asp-action="Details" asp-route-id="@host.Id" class="btn btn-outline-success">Details</a>
+                                <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@host.Room.Id" asp-route-allHosts="true" class="btn btn-outline-primary">Edit</a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@host.Room.Id')">
                                     Delete
                                 </button>
                             </div>

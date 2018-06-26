@@ -33,9 +33,17 @@ namespace PingSite.Core.Services
                 Id = host.Id,
                 Name = host.Name,
                 Address = host.Address,
-                CategoryId = host.Category.Id,
-                ImgUrl = host.Category.ImgUrl,
-                RoomId = host.Room.Id
+                Category = new CategoryDto
+                {
+                    Id = host.Category.Id,
+                    Name = host.Category.Name,
+                    ImgUrl = host.Category.ImgUrl
+                },
+                Room = new RoomDto
+                {
+                    Id = host.Room.Id,
+                    Name = host.Room.Name
+                }
             };
 
             return hostDto;
@@ -53,9 +61,17 @@ namespace PingSite.Core.Services
                     Id = host.Id,
                     Name = host.Name,
                     Address = host.Address,
-                    LastStatus = host.LastStatus,
-                    CategoryId = host.Category.Id,
-                    ImgUrl = host.Category.ImgUrl
+                    Category = new CategoryDto
+                    {
+                        Id = host.Category.Id,
+                        Name = host.Category.Name,
+                        ImgUrl = host.Category.ImgUrl
+                    },
+                    Room = new RoomDto
+                    {
+                        Id = host.Room.Id,
+                        Name = host.Room.Name
+                    }
                 });
             }
 
@@ -80,9 +96,17 @@ namespace PingSite.Core.Services
                     Id = host.Id,
                     Name = host.Name,
                     Address = host.Address,
-                    LastStatus = host.LastStatus,
-                    CategoryId = host.Category.Id,
-                    ImgUrl = host.Category.ImgUrl
+                    Category = new CategoryDto
+                    {
+                        Id = host.Category.Id,
+                        Name = host.Category.Name,
+                        ImgUrl = host.Category.ImgUrl
+                    },
+                    Room = new RoomDto
+                    {
+                        Id = host.Room.Id,
+                        Name = host.Room.Name
+                    }
                 });
             }
 
