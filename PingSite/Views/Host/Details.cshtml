@@ -59,6 +59,13 @@
                 </tbody>
             </table>
 
+            <div style="text-align: center; margin-bottom: 10px;">
+                <a asp-controller="Host" asp-action="Edit" asp-route-id="@Model.Host.Id" asp-route-roomId="@Model.Host.Room.Id" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@Model.Host.Id?roomId=@Model.Host.Room.Id')">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+            </div>
+
             <h3>Last 10 online status</h3>
             <table class="table table-bordered host-history-table">
                 <thead class="thead-dark">
@@ -81,5 +88,25 @@
             </table>
 
         </div>  
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Host</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Close</button>
+                <a id="deleteHostModal" href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+            </div>
+        </div>
     </div>
 </div>
