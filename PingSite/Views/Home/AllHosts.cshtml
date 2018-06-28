@@ -36,10 +36,10 @@
                                 <span style="color: red"><b>@host.Name</b></span>
                             }
                             <div class="options">
-                                <a asp-controller="Host" asp-action="Details" asp-route-id="@host.Id" class="btn btn-outline-success">Details</a>
-                                <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@host.Room.Id" asp-route-allHosts="true" class="btn btn-outline-primary">Edit</a>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@host.Room.Id')">
-                                    Delete
+                                <a asp-controller="Host" asp-action="Details" asp-route-id="@host.Id" class="btn btn-outline-success"><i class="fas fa-info-circle"></i> Details</a>
+                                <a asp-controller="Host" asp-action="Edit" asp-route-id="@host.Id" asp-route-roomId="@host.Room.Id" asp-route-allHosts="true" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Host/Delete/@host.Id?roomId=@host.Room.Id')">
+                                    <i class="fas fa-trash-alt"></i> Delete
                                 </button>
                             </div>
                         </div>

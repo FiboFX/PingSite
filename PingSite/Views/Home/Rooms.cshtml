@@ -11,7 +11,7 @@
 <div class="container container-back">
     <div class="row">
         <div class="col-lg" style="text-align: center;">
-            <a asp-controller="Room" asp-action="Add" asp-route-id="@ViewBag.BuildingId" class="btn btn-primary" style="margin-bottom: 10px;">Add</a>
+            <a asp-controller="Room" asp-action="Add" asp-route-id="@ViewBag.BuildingId" class="btn btn-primary" style="margin-bottom: 10px;"><i class="fas fa-plus"></i> Add</a>
         </div>
     </div>
 
@@ -22,9 +22,9 @@
                 <div class="list">
                     <img src="~/images/room.png" width="30" height="37"> <a asp-controller="Home" asp-action="Hosts" asp-route-id="@room.Id">@room.Name</a>
                     <div class="options">
-                        <a asp-controller="Room" asp-action="Edit" asp-route-id="@room.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary">Edit</a>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@room.Id?buildingId=@ViewBag.BuildingId')">
-                            Delete
+                        <a asp-controller="Room" asp-action="Edit" asp-route-id="@room.Id" asp-route-buildingId="@ViewBag.BuildingId" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" onclick="setHrefForDelete('/Room/Delete/@room.Id?buildingId=@ViewBag.BuildingId')">
+                            <i class="fas fa-trash-alt"></i> Delete
                         </button>
                     </div>
                 </div>
