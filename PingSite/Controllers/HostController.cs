@@ -97,7 +97,7 @@ namespace PingSite.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id, int roomId)
+        public async Task<IActionResult> Delete(int id, int roomId = 0)
         {
             var status = await _hostService.RemoveAsync(id);
 
