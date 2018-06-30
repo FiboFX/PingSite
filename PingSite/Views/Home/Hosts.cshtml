@@ -10,8 +10,9 @@
 
 <div class="container container-back">
     <div class="row">
-        <div class="col-lg" style="text-align: center;">
-            <a asp-controller="Host" asp-action="Add" asp-route-id="@ViewBag.RoomId" class="btn btn-primary" style="margin-bottom: 10px;"><i class="fas fa-plus"></i> Add</a>
+        <div class="col-lg" style="text-align: center; margin-bottom: 10px;">
+            <a asp-controller="Host" asp-action="RefreshStatus" asp-route-roomId="@ViewBag.RoomId" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Refresh Status</a>
+            <a asp-controller="Host" asp-action="Add" asp-route-id="@ViewBag.RoomId" class="btn btn-primary"><i class="fas fa-plus"></i> Add</a>
         </div>
     </div>
 

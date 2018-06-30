@@ -110,5 +110,20 @@ namespace PingSite.Controllers
                 return RedirectToAction("Hosts", "Home", new { id = roomId });
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> RefreshStatus(int roomId = 0)
+        {
+            await _hostService.RefreshStatus();
+
+            if(roomId == 0)
+            {
+                return RedirectToAction("AllHosts", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Hosts", "Home", new { id = roomId });
+            }
+        }
     }
 }

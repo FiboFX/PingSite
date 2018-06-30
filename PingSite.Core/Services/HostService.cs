@@ -156,5 +156,11 @@ namespace PingSite.Core.Services
             await _hostRepository.RemoveAsync(host);
             return true;
         }
+
+        public async Task RefreshStatus()
+        {
+            var autoPingTool = new AutoPingTool(_hostRepository, _hostHistoryService);
+            await autoPingTool.PingHosts();
+        }
     }
 }

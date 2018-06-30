@@ -46,7 +46,7 @@ namespace PingSite.Core.Services
                     if(settings.AutoPing)
                     {
                         var delay = settings.AutoPingDelay;
-                        RecurringJob.AddOrUpdate<AutoPingTool>("AutoPing", x => x.PingHost(), $"*/{delay} * * * *");
+                        RecurringJob.AddOrUpdate<AutoPingTool>("AutoPing", x => x.PingHosts(), $"*/{delay} * * * *");
                     }
                     else
                     {

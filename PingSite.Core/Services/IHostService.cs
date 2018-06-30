@@ -14,5 +14,6 @@ namespace PingSite.Core.Services
         Task<bool> AddAsync(string name, string address, int roomId, int categoryId);
         Task<bool> EditAsync(int id, string name, string address, int roomId, int categoryId);
         Task<bool> RemoveAsync(int id);
+        Task RefreshStatus();
     }
 }

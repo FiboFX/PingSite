@@ -18,7 +18,7 @@ namespace PingSite.Core.Tools
             _hostHistoryService = hostHistoryService;
         }
 
-        public async Task PingHost()
+        public async Task PingHosts()
         {
             var hosts = await _hostRepository.GetAllAsync();
 
