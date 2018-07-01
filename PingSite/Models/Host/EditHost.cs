@@ -19,11 +19,6 @@ namespace PingSite.Models.Host
         public int RoomId { get; set; }
         public bool AllHosts { get; set; }
 
-        public List<SelectListItem> Categories { get; set; }
-
-        public EditHost()
-        {
-            Categories = new List<SelectListItem>();
-        }
+        public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }

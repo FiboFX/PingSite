@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PingSite.Core.DTO;
 using PingSite.Core.Repositories;
 
@@ -32,6 +33,22 @@ namespace PingSite.Core.Services
             }
 
             return categoriesDto;
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetSelectItemListAsync()
+        {
+            var categories = await GetAllAsync();
+            var selectListItem = new List<SelectListItem>();
+            foreach (var category in categories)
+            {
+                selectListItem.Add(new SelectListItem
+                {
+                    Text = category.Name,
+                    Value = category.Id.ToString()
+                });
+            }
+
+            return selectListItem;
         }
     }
 }

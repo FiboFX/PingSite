@@ -77,15 +77,8 @@ namespace PingSite.Controllers
                 RoomId = roomId,
                 AllHosts = allHosts
             };
-            var categories = await _categoryService.GetAllAsync();
-            foreach(var category in categories)
-            {
-                editHost.Categories.Add(new SelectListItem
-                {
-                    Text = category.Name,
-                    Value = category.Id.ToString()
-                });
-            }
+
+            editHost.Categories = await _categoryService.GetSelectItemListAsync();
 
             return View(editHost);
         }
@@ -105,15 +98,7 @@ namespace PingSite.Controllers
                 return RedirectToAction("Hosts", "Home", new { id = editHost.RoomId });
             }
 
-            var categories = await _categoryService.GetAllAsync();
-            foreach (var category in categories)
-            {
-                editHost.Categories.Add(new SelectListItem
-                {
-                    Text = category.Name,
-                    Value = category.Id.ToString()
-                });
-            }
+            editHost.Categories = await _categoryService.GetSelectItemListAsync();
 
             return View(editHost);
         }
