@@ -8,6 +8,7 @@ namespace PingSite.Core.Services
 {
     public interface IRoomService
     {
+        Task<RoomDto> GetAsync(int roomId);
         Task<IEnumerable<RoomDto>> GetAllAsync();
         Task<IEnumerable<RoomDto>> GetAllAsync(int buildingId);
         Task<bool> AddAsync(string name, int buildingId);

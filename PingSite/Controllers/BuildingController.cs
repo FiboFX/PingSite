@@ -32,9 +32,11 @@ namespace PingSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var building = await _buildingService.GetAsync(id);
+
+            return View(new EditBuilding { Id = id, Name = building.Name });
         }
 
         [HttpPost]

@@ -8,6 +8,7 @@ namespace PingSite.Core.Services
 {
     public interface IBuildingService
     {
+        Task<BuildingDto> GetAsync(int buildingId);
         Task<IEnumerable<BuildingDto>> GetAllAsync();
         Task<bool> AddAsync(string name);
         Task<bool> UpdateAsync(int id, string name);
