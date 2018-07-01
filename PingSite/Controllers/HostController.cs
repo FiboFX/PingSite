@@ -52,9 +52,16 @@ namespace PingSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddHost addHost)
         {
-            var status = await _hostService.AddAsync(addHost.Name, addHost.Address, addHost.RoomId, addHost.CategoryId);
+            if(ModelState.IsValid)
+            {
+                var status = await _hostService.AddAsync(addHost.Name, addHost.Address, addHost.RoomId, addHost.CategoryId);
 
-            return RedirectToAction("Hosts", "Home", new { id = addHost.RoomId });
+                return RedirectToAction("Hosts", "Home", new { id = addHost.RoomId });
+            }
+
+            addHost.Categories = await _categoryService.GetAllAsync();
+
+            return View(addHost);
         }
 
         [HttpGet]
@@ -86,14 +93,29 @@ namespace PingSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditHost editHost)
         {
-            var status = await _hostService.EditAsync(editHost.Id, editHost.Name, editHost.Address, editHost.RoomId, editHost.CategoryId);
-
-            if(editHost.AllHosts)
+            if(ModelState.IsValid)
             {
-                return RedirectToAction("AllHosts", "Home");
+                var status = await _hostService.EditAsync(editHost.Id, editHost.Name, editHost.Address, editHost.RoomId, editHost.CategoryId);
+
+                if (editHost.AllHosts)
+                {
+                    return RedirectToAction("AllHosts", "Home");
+                }
+
+                return RedirectToAction("Hosts", "Home", new { id = editHost.RoomId });
             }
 
-            return RedirectToAction("Hosts", "Home", new { id = editHost.RoomId });
+            var categories = await _categoryService.GetAllAsync();
+            foreach (var category in categories)
+            {
+                editHost.Categories.Add(new SelectListItem
+                {
+                    Text = category.Name,
+                    Value = category.Id.ToString()
+                });
+            }
+
+            return View(editHost);
         }
 
         [HttpGet]

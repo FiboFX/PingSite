@@ -26,9 +26,14 @@ namespace PingSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddBuilding addBuilding)
         {
-            var status = await _buildingService.AddAsync(addBuilding.Name);
+            if(ModelState.IsValid)
+            {
+                var status = await _buildingService.AddAsync(addBuilding.Name);
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(addBuilding);
         }
 
         [HttpGet]
@@ -42,9 +47,14 @@ namespace PingSite.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditBuilding editBuilding)
         {
-            var status = await _buildingService.UpdateAsync(editBuilding.Id, editBuilding.Name);
+            if(ModelState.IsValid)
+            {
+                var status = await _buildingService.UpdateAsync(editBuilding.Id, editBuilding.Name);
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(editBuilding);
         }
 
         [HttpGet]

@@ -28,9 +28,14 @@ namespace PingSite.Controllers
         [HttpPost]
         public async Task<IActionResult> General(Settings settings)
         {
-            await _settingService.UpdateAsync(settings);
+            if(ModelState.IsValid)
+            {
+                await _settingService.UpdateAsync(settings);
 
-            return RedirectToAction("General");
+                return RedirectToAction("General");
+            }
+
+            return View(settings);
         }
     }
 }
