@@ -11,14 +11,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg">
-            @using (Html.BeginForm())
-            {
-                <div class="form-group">
-                    <label>Name</label>
-                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            <div class="card form-card">
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        <div class="form-group">
+                            <label>Name</label>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+                    }
                 </div>
-                <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
-            }
+            </div>
         </div>
     </div>
 </div>
