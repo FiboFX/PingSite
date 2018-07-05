@@ -1,3 +1,1 @@
 *.cs linguist-language=C#
-*.cs linguist-vendored=C#
-PingSite/PingSite/wwwroot/* linguist-vendored=true
