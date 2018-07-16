@@ -1,0 +1,35 @@
+﻿@model IEnumerable<PingSite.Core.DTO.CategoryDto>
+
+@{ 
+    Layout = "SettingsLayout";
+}
+
+<div class="row">
+    <div class="col-lg" style="text-align: center;">
+        <h2>Categories</h2>
+    </div>
+</div>
+<hr />
+
+<table class="table table-striped">
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td style="max-width: 20px;"><img src="@category.ImgUrl" width="37px" height="37px" /></td>
+                <th>@category.Name</th>
+                <td style="float: right">
+                    <a href="#"><i class="fas fa-edit"></i></a>
+                    <a href="#" style="color: red"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    let categoriesSettings = document.querySelector("#categoriesSettings");
+    categoriesSettings.classList.add('active');
+    let settingsNav = document.getElementById('settingsNav');
+    settingsNav.classList.add('active');
+</script>

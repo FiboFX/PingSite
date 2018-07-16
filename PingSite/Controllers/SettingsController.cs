@@ -11,10 +11,12 @@ namespace PingSite.Controllers
     public class SettingsController : Controller
     {
         private readonly ISettingService _settingService;
+        private readonly ICategoryService _categoryService;
 
-        public SettingsController(ISettingService settingService)
+        public SettingsController(ISettingService settingService, ICategoryService categoryService)
         {
             _settingService = settingService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -36,6 +38,14 @@ namespace PingSite.Controllers
             }
 
             return View(settings);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Categories()
+        {
+            var categories = await _categoryService.GetAllAsync();
+
+            return View(categories);
         }
     }
 }
