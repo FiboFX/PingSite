@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PingSite.Core.DTO;
+using PingSite.Core.Models;
 using PingSite.Core.Repositories;
 
 namespace PingSite.Core.Services
@@ -49,6 +50,14 @@ namespace PingSite.Core.Services
             }
 
             return selectListItem;
+        }
+
+        public async Task<bool> Add(string name, string fileName)
+        {
+            Category category = Category.Create(null, name, "/images/" + fileName);
+            await _categoryRepository.AddAsync(category);
+
+            return true;
         }
     }
 }

@@ -11,5 +11,6 @@ namespace PingSite.Core.Services
     {
         Task<IEnumerable<CategoryDto>> GetAllAsync();
         Task<IEnumerable<SelectListItem>> GetSelectItemListAsync();
+        Task<bool> Add(string name, string fileName);
     }
 }
