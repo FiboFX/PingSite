@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PingSite.Core.Services;
+using PingSite.Core.Tools;
 using PingSite.Models.Category;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,21 +32,40 @@ namespace PingSite.Controllers
         {
             if(ModelState.IsValid)
             {
-                var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/images",
-                        addCategory.File.FileName);
-
-                using (var stream = new FileStream(path, FileMode.Create))
-                {
-                    await addCategory.File.CopyToAsync(stream);
-                }
-
-                var status = await _categoryService.Add(addCategory.Name, addCategory.File.FileName);
+                var status = await _categoryService.Add(addCategory.Name, addCategory.File);
 
                 return RedirectToAction("Categories", "Settings");
             }
 
             return View(addCategory);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var category = await _categoryService.GetAsync(id);
+
+            var editCategory = new EditCategory
+            {
+                Id = (int)category.Id,
+                Name = category.Name,
+                ImgUrl = category.ImgUrl
+            };
+
+            return View(editCategory);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditCategory editCategory)
+        {
+            if(ModelState.IsValid)
+            {
+                var status = await _categoryService.Edit(editCategory.Id, editCategory.Name, editCategory.File);
+
+                return RedirectToAction("Categories", "Settings");
+            }
+
+            return View(editCategory);
         }
     }
 }

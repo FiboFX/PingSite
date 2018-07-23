@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PingSite.Core.DTO;
 using PingSite.Core.Models;
 using PingSite.Core.Repositories;
+using PingSite.Core.Tools;
 
 namespace PingSite.Core.Services
 {
@@ -16,6 +18,19 @@ namespace PingSite.Core.Services
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
+        }
+
+        public async Task<CategoryDto> GetAsync(int id)
+        {
+            var category = await _categoryRepository.GetAsync(id);
+            var categoryDto = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                ImgUrl = category.ImgUrl
+            };
+
+            return categoryDto;
         }
 
         public async Task<IEnumerable<CategoryDto>> GetAllAsync()
@@ -52,10 +67,31 @@ namespace PingSite.Core.Services
             return selectListItem;
         }
 
-        public async Task<bool> Add(string name, string fileName)
+        public async Task<bool> Add(string name, IFormFile file)
         {
-            Category category = Category.Create(null, name, "/images/" + fileName);
+            FileTool fileTool = new FileTool();
+            await fileTool.CopyFile(file);
+
+            Category category = Category.Create(null, name, "/images/" + file.FileName);
             await _categoryRepository.AddAsync(category);
+
+            return true;
+        }
+
+        public async Task<bool> Edit(int id, string name, IFormFile file)
+        {
+            var category = await _categoryRepository.GetAsync(id);
+
+            if(file != null)
+            {
+                FileTool fileTool = new FileTool();
+                fileTool.DeleteImg(category.ImgUrl);
+                await fileTool.CopyFile(file);
+                category.SetImgUrl("/images/" + file.FileName);
+            }
+            category.SetName(name);
+            
+            await _categoryRepository.UpdateAsync(category);
 
             return true;
         }

@@ -1,0 +1,37 @@
+﻿@model PingSite.Models.Category.EditCategory
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg" style="text-align: center;">
+            <h1>Edit Category</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <div class="card form-card">
+                <div class="card-body">
+                    @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(x => x.Id)
+                        <div class="form-group">
+                            <label>Name</label>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group" style="text-align: center;">
+                            <label>Picture</label>
+                            <img src="@Model.ImgUrl" class="img-form"/>
+                            <input type="file" name="File" class="form-control" />
+                            @Html.ValidationMessageFor(x => x.File, "", new { @class = "text-danger" })
+                        </div>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Change</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

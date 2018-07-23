@@ -27,6 +27,7 @@ INSERT INTO Categories(Name, ImgUrl) VALUES('Router', '/images/router.png')
 INSERT INTO Categories(Name, ImgUrl) VALUES('Notebook', '/images/notebook.png')
 INSERT INTO Categories(Name, ImgUrl) VALUES('Camera', '/images/camera.png')
 INSERT INTO Categories(Name, ImgUrl) VALUES('TV', '/images/tv.png')
+INSERT INTO Categories(Name, ImgUrl) VALUES('TV', '/images/tablet.png')
 
 CREATE TABLE Hosts (
 	Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,

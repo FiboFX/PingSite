@@ -53,6 +53,13 @@
     font-weight: bold;
 }
 
+.img-form{
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 10px auto;
+}
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
