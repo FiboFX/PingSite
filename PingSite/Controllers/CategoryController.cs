@@ -32,7 +32,7 @@ namespace PingSite.Controllers
         {
             if(ModelState.IsValid)
             {
-                var status = await _categoryService.Add(addCategory.Name, addCategory.File);
+                var status = await _categoryService.AddAsync(addCategory.Name, addCategory.File);
 
                 return RedirectToAction("Categories", "Settings");
             }
@@ -60,12 +60,20 @@ namespace PingSite.Controllers
         {
             if(ModelState.IsValid)
             {
-                var status = await _categoryService.Edit(editCategory.Id, editCategory.Name, editCategory.File);
+                var status = await _categoryService.EditAsync(editCategory.Id, editCategory.Name, editCategory.File);
 
                 return RedirectToAction("Categories", "Settings");
             }
 
             return View(editCategory);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var status = await _categoryService.RemoveAsync(id);
+
+            return RedirectToAction("Categories", "Settings");
         }
     }
 }

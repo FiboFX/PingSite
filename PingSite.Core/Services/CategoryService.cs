@@ -67,7 +67,7 @@ namespace PingSite.Core.Services
             return selectListItem;
         }
 
-        public async Task<bool> Add(string name, IFormFile file)
+        public async Task<bool> AddAsync(string name, IFormFile file)
         {
             FileTool fileTool = new FileTool();
             await fileTool.CopyFile(file);
@@ -78,7 +78,7 @@ namespace PingSite.Core.Services
             return true;
         }
 
-        public async Task<bool> Edit(int id, string name, IFormFile file)
+        public async Task<bool> EditAsync(int id, string name, IFormFile file)
         {
             var category = await _categoryRepository.GetAsync(id);
 
@@ -93,6 +93,20 @@ namespace PingSite.Core.Services
             
             await _categoryRepository.UpdateAsync(category);
 
+            return true;
+        }
+
+        public async Task<bool> RemoveAsync(int id)
+        {
+            var category = await _categoryRepository.GetAsync(id);
+            if(category == null)
+            {
+                return false;
+            }
+
+            await _categoryRepository.RemoveAsync(category);
+            FileTool fileTool = new FileTool();
+            fileTool.DeleteImg(category.ImgUrl);
             return true;
         }
     }

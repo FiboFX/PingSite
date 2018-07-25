@@ -13,7 +13,8 @@ namespace PingSite.Core.Services
         Task<CategoryDto> GetAsync(int id);
         Task<IEnumerable<CategoryDto>> GetAllAsync();
         Task<IEnumerable<SelectListItem>> GetSelectItemListAsync();
-        Task<bool> Add(string name, IFormFile file);
-        Task<bool> Edit(int id, string name, IFormFile file);
+        Task<bool> AddAsync(string name, IFormFile file);
+        Task<bool> EditAsync(int id, string name, IFormFile file);
+        Task<bool> RemoveAsync(int id);
     }
 }
