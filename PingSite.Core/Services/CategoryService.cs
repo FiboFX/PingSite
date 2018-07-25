@@ -104,7 +104,14 @@ namespace PingSite.Core.Services
                 return false;
             }
 
-            await _categoryRepository.RemoveAsync(category);
+            try
+            {
+                await _categoryRepository.RemoveAsync(category);
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
             FileTool fileTool = new FileTool();
             fileTool.DeleteImg(category.ImgUrl);
             return true;
