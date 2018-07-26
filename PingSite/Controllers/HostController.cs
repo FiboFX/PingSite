@@ -54,7 +54,7 @@ namespace PingSite.Controllers
         {
             if(ModelState.IsValid)
             {
-                var status = await _hostService.AddAsync(addHost.Name, addHost.Address, addHost.RoomId, addHost.CategoryId);
+                var status = await _hostService.AddAsync(addHost.Name, addHost.Address, addHost.MACAddress, addHost.RoomId, addHost.CategoryId);
 
                 return RedirectToAction("Hosts", "Home", new { id = addHost.RoomId });
             }
@@ -73,6 +73,7 @@ namespace PingSite.Controllers
                 Id = id,
                 Name = host.Name,
                 Address = host.Address,
+                MACAddress = host.MACAddress,
                 CategoryId = (int)host.Category.Id,
                 RoomId = roomId,
                 AllHosts = allHosts
@@ -88,7 +89,7 @@ namespace PingSite.Controllers
         {
             if(ModelState.IsValid)
             {
-                var status = await _hostService.EditAsync(editHost.Id, editHost.Name, editHost.Address, editHost.RoomId, editHost.CategoryId);
+                var status = await _hostService.EditAsync(editHost.Id, editHost.Name, editHost.Address, editHost.MACAddress, editHost.RoomId, editHost.CategoryId);
 
                 if (editHost.AllHosts)
                 {
