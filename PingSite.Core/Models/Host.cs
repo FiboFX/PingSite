@@ -9,6 +9,7 @@ namespace PingSite.Core.Models
         public int? Id { get; private set; }
         public string Name { get; private set; }
         public string Address { get; private set; }
+        public string MACAddress { get; set; }
         public bool LastStatus { get; private set; }
         
         public Category Category { get; private set; }
@@ -16,11 +17,12 @@ namespace PingSite.Core.Models
 
         protected Host() { }
 
-        protected Host(int? id, string name, string address, bool lastStatus, Category category, Room room)
+        protected Host(int? id, string name, string address, string macAddress, bool lastStatus, Category category, Room room)
         {
             Id = id;
             SetName(name);
             SetAddress(address);
+            MACAddress = macAddress;
             LastStatus = lastStatus;
             Category = category;
             Room = room;
@@ -44,6 +46,11 @@ namespace PingSite.Core.Models
             Address = address;
         }
 
+        public void SetMacAddress(string macAddress)
+        {
+            MACAddress = macAddress;
+        }
+
         public void SetLastStatus(bool status)
         {
             LastStatus = status;
@@ -65,7 +72,7 @@ namespace PingSite.Core.Models
             }
         }
 
-        public static Host Create(int? id, string name, string address, bool lastStatus, Category category, Room room)
-            => new Host(id, name, address, lastStatus, category, room);
+        public static Host Create(int? id, string name, string address, string macAddress, bool lastStatus, Category category, Room room)
+            => new Host(id, name, address, macAddress, lastStatus, category, room);
     }
 }

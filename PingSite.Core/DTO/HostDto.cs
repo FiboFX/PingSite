@@ -9,6 +9,7 @@ namespace PingSite.Core.DTO
         public int? Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public string MACAddress { get; set; }
         public bool LastStatus { get; set; }
         
         public CategoryDto Category { get; set; }

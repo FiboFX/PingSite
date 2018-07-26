@@ -13,6 +13,7 @@ namespace PingSite.Models.Host
         public string Name { get; set; }
         [Required]
         public string Address { get; set; }
+        public string MACAddress { get; set; }
         public int RoomId { get; set; }
         [Required]
         public int CategoryId { get; set; }
