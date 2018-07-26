@@ -11,8 +11,8 @@ namespace PingSite.Core.Services
         Task<HostDto> GetAsync(int id);
         Task<IEnumerable<HostDto>> GetAllAsync();
         Task<IEnumerable<HostDto>> GetAllAsync(int id);
-        Task<bool> AddAsync(string name, string address, int roomId, int categoryId);
-        Task<bool> EditAsync(int id, string name, string address, int roomId, int categoryId);
+        Task<bool> AddAsync(string name, string address, string macAddress, int roomId, int categoryId);
+        Task<bool> EditAsync(int id, string name, string address, string macAddress, int roomId, int categoryId);
         Task<bool> RemoveAsync(int id);
         Task RefreshStatus();
     }
